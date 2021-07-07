@@ -86,7 +86,15 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Random title',
+    date: 'July 7th 2021',
+    firstParagraph: `random words random words random words random words random words random words random words random words random words random words`,
+    secondParagraph: `random words random words random words random words random words random words random wordsrandom words random words random words`,
+    thirdParagraph: `random words random words random wordsrandom wordsrandom words random words random words random words random words random words random words`
   }
+
 ];
 
 /*
@@ -114,3 +122,50 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+const target = document.querySelector('.articles')
+
+function articleMaker(articleObj) {
+
+  const article = document.createElement('div');
+  const title = document.createElement('h2');
+  const date = document.createElement('p');
+  const firstParagraph = document.createElement('p');
+  const secondParagraph = document.createElement('p');
+  const thirdParagraph = document.createElement('p');
+  const expandButton = document.createElement ('span');
+
+  article.appendChild(title);
+  article.appendChild(date);
+  article.appendChild(firstParagraph);
+  article.appendChild(secondParagraph);
+  article.appendChild(thirdParagraph);
+  article.appendChild(expandButton);
+
+ article.classList.add('article');
+ title.classList.add('title');
+ date.classList.add('date');
+ firstParagraph.classList.add('firstParagraph');
+ secondParagraph.classList.add('secondParagraph');
+ thirdParagraph.classList.add('thirdParagraph');
+ expandButton.classList.add('expandButton');
+
+ title.textContent = articleObj.title;
+ date.textContent = articleObj.date;
+ firstParagraph.textContent = articleObj.firstParagraph;
+ secondParagraph.textContent = articleObj.secondParagraph;
+ thirdParagraph.textContent = articleObj.thirdParagraph;
+ expandButton.textContent = '+';
+
+
+ expandButton.addEventListener('click', () => {
+  article.classList.toggle('article-open');
+ });
+
+  return article;
+}
+
+const articleElements = data.map(data => {
+  return articleMaker(data);
+});
+
+articleElements.forEach(elm => target.appendChild(elm));
